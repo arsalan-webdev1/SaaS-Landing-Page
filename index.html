@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulseboard | Turn your data into decisions</title>
+<meta name="description" content="Pulseboard is a fictional analytics dashboard demo built with HTML, CSS and vanilla JavaScript.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+<script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M21 20H3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14.3c2.2.6 3.5 2.6 3.5 5.7"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 10v4h3l8 4V6L6 10zM18 9a4 4 0 0 1 0 6"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-dollar" viewBox="0 0 24 24"><path d="M12 3v18M16 7.5C15 6.5 13.7 6 12 6c-2.4 0-4 1.2-4 3s1.6 2.5 4 3 4 1.2 4 3-1.6 3-4 3c-1.800 0-3.200-.5-4.200-1.500"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8zM7.500 8h.01"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5M4 21h16"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+</svg>
+
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar" aria-label="Primary">
+    <a class="brand" href="#overview" data-view="overview">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-7 5 14 3-7h5"/></svg></span>
+      <span class="brand-name">Pulseboard</span>
+    </a>
+    <nav class="nav" aria-label="Dashboard sections">
+      <a href="#overview" data-view="overview"><svg class="i"><use href="#i-home"/></svg>Overview</a>
+      <a href="#analytics" data-view="analytics"><svg class="i"><use href="#i-chart"/></svg>Analytics</a>
+      <a href="#audience" data-view="audience"><svg class="i"><use href="#i-users"/></svg>Audience</a>
+      <a href="#reports" data-view="reports"><svg class="i"><use href="#i-file"/></svg>Reports</a>
+      <a href="#campaigns" data-view="campaigns"><svg class="i"><use href="#i-mega"/></svg>Campaigns</a>
+      <a href="#settings" data-view="settings"><svg class="i"><use href="#i-gear"/></svg>Settings</a>
+    </nav>
+    <div class="sidebar-foot">
+      <a class="nav-help" href="#help" data-view="help"><svg class="i"><use href="#i-help"/></svg>Help and support</a>
+      <p class="tagline">TURN YOUR DATA INTO DECISIONS.</p>
+      <div class="profile">
+        <span class="avatar" aria-hidden="true">AK</span>
+        <span><strong>Alex Kim</strong><small>Owner, Northwind Goods</small></span>
+      </div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+
+  <div class="workspace">
+    <!-- Top navigation -->
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false"><svg class="i"><use href="#i-menu"/></svg></button>
+      <p class="crumb">Northwind Goods <span aria-hidden="true">/</span> <strong id="viewTitle">Overview</strong></p>
+      <form class="search" role="search" onsubmit="return false">
+        <label class="sr-only" for="globalSearch">Search transactions by customer or ID</label>
+        <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
+        <input id="globalSearch" type="search" placeholder="Search transactions" autocomplete="off">
+      </form>
+      <div class="topbar-actions">
+        <label class="sr-only" for="period">Reporting period</label>
+        <select id="period" class="select">
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="90">Last 90 days</option>
+        </select>
+        <div class="popover-host">
+          <button class="icon-btn" id="notifBtn" type="button" aria-label="Notifications" aria-expanded="false" aria-controls="notifPanel">
+            <svg class="i"><use href="#i-bell"/></svg><span class="dot" id="notifDot"></span>
+          </button>
+          <div class="popover" id="notifPanel" hidden>
+            <div class="popover-head"><strong>Notifications</strong><button class="link-btn" id="markRead" type="button">Mark all as read</button></div>
+            <ul class="notice-list" id="noticeList"></ul>
+          </div>
+        </div>
+        <div class="popover-host">
+          <button class="avatar-btn" id="profileBtn" type="button" aria-label="Open profile menu" aria-expanded="false" aria-controls="profileMenu">AK</button>
+          <div class="popover menu" id="profileMenu" hidden>
+            <p class="menu-user"><strong>Alex Kim</strong><small>alex@northwind.example</small></p>
+            <button type="button" data-view="settings">Account settings</button>
+            <button type="button" data-action="billing">Billing</button>
+            <button type="button" data-action="signout">Sign out</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <!-- Welcome -->
+      <section class="welcome reveal-section" data-views="overview" aria-labelledby="welcomeTitle">
+        <div>
+          <h1 id="welcomeTitle">Good morning, Alex.</h1>
+          <p class="muted">Here's what's happening with your business today. All figures are fictional sample data.</p>
+        </div>
+        <div class="seg" role="group" aria-label="Reporting period">
+          <button type="button" data-period="7" aria-pressed="false">7 days</button>
+          <button type="button" data-period="30" aria-pressed="true">30 days</button>
+          <button type="button" data-period="90" aria-pressed="false">90 days</button>
+        </div>
+      </section>
+
+      <section class="reveal-section" data-views="overview analytics" aria-label="Key metrics">
+        <div class="grid-kpi" id="kpiGrid"></div>
+      </section>
+
+      <div class="row" data-views="overview analytics">
+        <section class="card grow-2 reveal-section" aria-labelledby="revTitle">
+          <div class="card-head">
+            <div><h2 id="revTitle">Revenue</h2><p class="muted" id="revSub"></p></div>
+            <p class="big-num" id="revTotal"></p>
+          </div>
+          <div class="chart-wrap" id="revenueWrap"><canvas id="revenueChart" role="img" aria-label="Revenue chart"></canvas></div>
+        </section>
+        <section class="card reveal-section" aria-labelledby="trafficTitle">
+          <div class="card-head"><div><h2 id="trafficTitle">Traffic sources</h2><p class="muted">Share of sessions</p></div></div>
+          <div class="donut-wrap"><canvas id="trafficChart" role="img" aria-label="Traffic sources donut chart"></canvas></div>
+          <ul class="legend" id="trafficLegend"></ul>
+        </section>
+      </div>
+
+      <div class="row">
+        <section class="card grow-2 reveal-section" data-views="overview analytics" aria-labelledby="pagesTitle">
+          <div class="card-head"><div><h2 id="pagesTitle">Top performing pages</h2><p class="muted">Ranked by page views</p></div></div>
+          <div class="table-scroll">
+            <table class="table" id="pagesTable">
+              <thead><tr><th scope="col">Page</th><th scope="col">Page views</th><th scope="col" class="num">Visitors</th><th scope="col" class="num">Conversion</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="card reveal-section" data-views="overview audience" aria-labelledby="audTitle">
+          <div class="card-head"><div><h2 id="audTitle">Audience overview</h2><p class="muted">Who is visiting</p></div></div>
+          <div id="audienceBody"></div>
+        </section>
+      </div>
+
+      <section class="card reveal-section" data-views="overview reports" aria-labelledby="actTitle">
+        <div class="card-head"><div><h2 id="actTitle">Quick actions</h2><p class="muted">Download data or jump to a detailed view</p></div></div>
+        <div class="actions">
+          <button class="btn primary" type="button" data-action="report"><svg class="i"><use href="#i-file"/></svg>Generate report</button>
+          <button class="btn" type="button" data-action="export"><svg class="i"><use href="#i-download"/></svg>Export data</button>
+          <button class="btn" type="button" data-view="analytics"><svg class="i"><use href="#i-chart"/></svg>View analytics</button>
+        </div>
+      </section>
+
+      <section class="card reveal-section" data-views="overview reports" aria-labelledby="txTitle">
+        <div class="card-head">
+          <div><h2 id="txTitle">Recent transactions</h2><p class="muted" id="txCount" aria-live="polite"></p></div>
+          <div class="tx-controls">
+            <label class="field"><span>Status</span>
+              <select id="statusFilter" class="select">
+                <option value="all">All statuses</option><option value="completed">Completed</option>
+                <option value="pending">Pending</option><option value="refunded">Refunded</option>
+              </select></label>
+            <label class="field"><span>Sort by</span>
+              <select id="sortBy" class="select">
+                <option value="date-desc">Date, newest first</option><option value="date-asc">Date, oldest first</option>
+                <option value="amount-desc">Amount, high to low</option><option value="amount-asc">Amount, low to high</option>
+              </select></label>
+            <button class="btn" type="button" data-action="export"><svg class="i"><use href="#i-download"/></svg>Export CSV</button>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="table stack" id="txTable">
+            <thead><tr><th scope="col">Customer</th><th scope="col">Transaction ID</th><th scope="col">Date</th><th scope="col" class="num">Amount</th><th scope="col">Status</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card panel reveal-section" data-views="campaigns" hidden aria-labelledby="campTitle">
+        <h2 id="campTitle">Campaigns</h2>
+        <p class="muted">Campaign tracking is a frontend demonstration. There is no ad platform connected, so nothing is listed here.</p>
+        <button class="btn" type="button" data-view="overview">Back to overview</button>
+      </section>
+      <section class="card panel reveal-section" data-views="settings" hidden aria-labelledby="setTitle">
+        <h2 id="setTitle">Settings</h2>
+        <p class="muted">Account and workspace settings are a frontend demonstration. Nothing you change here is saved.</p>
+        <button class="btn" type="button" data-view="overview">Back to overview</button>
+      </section>
+      <section class="card panel reveal-section" data-views="help" hidden aria-labelledby="helpTitle">
+        <h2 id="helpTitle">Help and support</h2>
+        <p class="muted">Pulseboard is a fictional product. Use the search field to find transactions, the period selector to change every chart, and Export CSV to download the rows you see.</p>
+        <button class="btn" type="button" data-view="overview">Back to overview</button>
+      </section>
+
+      <p class="foot-note">Pulseboard demo. Sample data runs through Sep 30, 2026 and is not connected to a real analytics service.</p>
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
